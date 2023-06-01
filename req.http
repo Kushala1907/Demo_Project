@@ -1,0 +1,47 @@
+###SIGNUP
+POST http://localhost:2222/user-api/register-user
+Content-Type: application/json
+
+{
+    "name":"vishnu",
+    "email":"vishnu@gmail.com",
+    "password":"kushala"
+}
+
+###LOGIN
+POST http://localhost:2222/user-api/login-user
+Content-Type: application/json
+
+{
+    "email":"naredlakushala@gmail.com",
+    "password":"kushala"
+}
+
+###ADD IMAGE
+POST http://localhost:2222/user-api/add-image
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hcmVkbGFrdXNoYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY4NTUwNzIxMSwiZXhwIjoxNjg1NTEwODExfQ.efVttn20Cud7Y_XOZWd18o-KfIOhIOOW9lpfgVpbeWM
+Content-Type: application/json
+
+{
+    "email":"naredlakushala@gmail.com",
+    "day":"monday",
+    "image_url":"kushala"
+}
+
+###GET ALL IMAGES
+GET http://localhost:2222/user-api/get-images
+
+
+###UPDATE IMAGE
+PUT http://localhost:2222/user-api/update-image/naredlakushala@gmail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hcmVkbGFrdXNoYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY4NTUwNzIxMSwiZXhwIjoxNjg1NTEwODExfQ.efVttn20Cud7Y_XOZWd18o-KfIOhIOOW9lpfgVpbeWM
+Content-Type: application/json
+
+{
+    "id":1,
+    "image_url":"varma1"
+}
+
+###DELETE IMAGE
+DELETE http://localhost:2222/user-api/delete-image/naredlakushala@gmail.com/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hcmVkbGFrdXNoYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY4NTUwNzIxMSwiZXhwIjoxNjg1NTEwODExfQ.efVttn20Cud7Y_XOZWd18o-KfIOhIOOW9lpfgVpbeWM

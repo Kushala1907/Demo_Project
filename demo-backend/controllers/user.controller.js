@@ -58,29 +58,28 @@ const loginUser=expressAsyncHandler(async (req,res)=>{
         const { email, password } = req.body;
         // Check if all required properties are present in the request body
         if (!email || !password) {
-          return res.status(400).json({ message: 'Please provide email and password' });
+          return res.status(400).send({ message: 'Please provide email and password' });
         }
         // Find the user by email
         const user = await User.findOne({ where: { email } });
         // If user doesn't exist
         if (!user) {
-          return res.status(401).json({ message: 'Invalid email or password' });
+          return res.status(401).send({ message: 'Invalid email or password' });
         }
         // Compare the password
         const passwordMatch = await bcryptjs.compare(password, user.password);
         // If password doesn't match
         if (!passwordMatch) {
-          return res.status(401).json({ message: 'Invalid email or password' });
+          return res.status(401).send({ message: 'Invalid email or password' });
         }
         // Generate a JWT token
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
         // Send the token and user information in the response
-        res.json({
+        res.send({
           message: 'Login successful',
           token,
           user: {  
-            email: user.email
-            
+            email: user.email  
           }
         });
       } catch (error) {
@@ -93,12 +92,12 @@ const loginUser=expressAsyncHandler(async (req,res)=>{
 const addImage=expressAsyncHandler(async(req,res)=>{
   
   try {
-      const { email, day, image_url } = req.body;
+      const { day, image_url } = req.body;
       
-      const userExists = await User.findOne({ where: { email } });
-      if (!userExists) {
-          return res.json({ message: 'User not exist' });
-      }
+      // const userExists = await User.findOne({ where: { email } });
+      // if (!userExists) {
+      //     return res.send({ message: 'User not exist' });
+      // }
       
       // upload image
       await Data.create(req.body)
@@ -106,7 +105,7 @@ const addImage=expressAsyncHandler(async(req,res)=>{
       //res.status(201).json({ message: 'Image uploaded successfully' });
       let mailOptions = {
         from: 'kushalaindia@gmail.com',
-        to: req.body.email,
+        to: req.params.email,
         subject: 'Image Uploaded',
         text: `Your image has been successfully uploaded.`
       }
@@ -114,15 +113,15 @@ const addImage=expressAsyncHandler(async(req,res)=>{
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
         console.error('Failed to send email', error);
-        res.status(500).json({ error: 'Failed to send email' });
+        res.status(500).send({ error: 'Failed to send email' });
       } else {
         console.log('Email sent', info.response);
-        res.status(200).json({ message: 'Image uploaded and email sent' });
+        res.status(200).send({ message: 'Image uploaded and email sent' });
       }
       })
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Failed to upload' });
+      res.status(500).send({ error: 'Failed to upload' });
     }
 });
 

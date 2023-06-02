@@ -18,12 +18,11 @@ Content-Type: application/json
 }
 
 ###ADD IMAGE
-POST http://localhost:2222/user-api/add-image
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hcmVkbGFrdXNoYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY4NTUwNzIxMSwiZXhwIjoxNjg1NTEwODExfQ.efVttn20Cud7Y_XOZWd18o-KfIOhIOOW9lpfgVpbeWM
+POST http://localhost:2222/user-api/add-image/naredlakushala@gmail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hcmVkbGFrdXNoYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY4NTY4ODY2MywiZXhwIjoxNjg1NjkyMjYzfQ.EIVhxSLy4pZL2qSlY2psDm563K_bShQRUrlZXT3Ci0g
 Content-Type: application/json
 
 {
-    "email":"naredlakushala@gmail.com",
     "day":"monday",
     "image_url":"kushala"
 }

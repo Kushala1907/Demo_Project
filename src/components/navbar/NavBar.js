@@ -1,20 +1,20 @@
 import { NavLink } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
-//import {clearState} from '../../slices/loginSlice';
+import {clearState} from '../../slices/loginslice';
 
 
 import './NavBar.css'
 function NavBar() {
   //declare useDispatch method
-//   let dispatch=useDispatch();
-//   //destrcture from store
-//   let {userObj,status}=useSelector((state)=>state.login)
+  let dispatch=useDispatch();
+  //destrcture from store
+  let {userObj,status}=useSelector((state)=>state.login)
  
-//   //logout
-//   const logout=()=>{
-//     sessionStorage.removeItem("token")
-//     dispatch(clearState())
-//   }
+  //logout
+  const logout=()=>{
+    sessionStorage.removeItem("token")
+    dispatch(clearState())
+  }
   return (
     <div className="navbar d-flex ">
       <ul className="nav ms-5">
@@ -38,7 +38,7 @@ function NavBar() {
             Register
           </NavLink>
         </li> 
-        {/* {(status=="success")?(<li className="nav-item">
+        {(status=="success")?(<li className="nav-item">
           <NavLink
             className={({ isActive }) =>
               isActive ? "active nav-link" : "inactive nav-link"
@@ -48,7 +48,7 @@ function NavBar() {
             Logout
           </NavLink>
         </li>):
-        (*/}
+        (
         <li className="nav-item"> 
           <NavLink
             className={({ isActive }) =>
@@ -59,7 +59,7 @@ function NavBar() {
             Login
           </NavLink>
         </li>
-        {/* )} */}
+       )} 
       </ul>
       {/* {(status=="success")&&(<p className="ps-5 ms-5"> {userObj.email} <img src={userImg} width="50px" height="50px" className="rounded-circle align-items-lg-end ms-4"/></p>)} */}
     </div>

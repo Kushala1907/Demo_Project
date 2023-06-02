@@ -1,20 +1,40 @@
-import { useState } from "react";
+import { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import React from 'react';
+import {userLogin} from '../../slices/loginslice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import  axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  
+    //get userState from redux store using useSelector hook
+    let {userObj,status,errorMessage}=useSelector(state=>state.login)
+    //decalre useNavigate method
+    let navigate=useNavigate()
+    //declare dispatch method
+    let dispatch=useDispatch()
+
+    //useEffect
+    useEffect(()=>{
+      //if login success
+      if(status==="success"){
+        //if user is super admin  
+        navigate(`/add-image/${userObj.email}`)  
+      }
+      //if login failed 
+      else{
+        //if login fails naviagte login agian
+        navigate('/login')
+      }
+    },[status])
     const initialValues = {
       email: '',
       password: '',
-    };
-  
-    const handleSubmit = (values) => {
+    };  
+    const handleSubmit = async(user, { resetForm }) => {
       // Handle form submission
-      console.log(values);
+      console.log("user after submit",user);  
+      dispatch(userLogin(user))
+      
     };
   
     return (

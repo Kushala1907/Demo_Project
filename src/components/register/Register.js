@@ -8,62 +8,51 @@ import { useNavigate } from 'react-router-dom';
 function Register() {
     //const history = useHistory();
     let navigate=useNavigate()
-    // //taking state for message
+    //taking state for error
      let [err,setErr]=useState("")
-
+    //initialze values
     const initialValues = {
       name: '',
       email: '',
       password: '',
-    };
-  
+    }; 
     const handleSubmit = async(user, { resetForm }) => {
       // Handle form submission
-      console.log("user after submit",user);
-      
-      
+      console.log("user after submit",user);  
       try{
-        //clear form
         //post request to create new employee
         let res=await axios.post("http://localhost:2222/user-api/register-user",user);
-        console.log("response",res)
-        
+        console.log("response",res) 
         //if registered successfully
         if(res.data.message==="User registered successfully"){
             setErr("");
             navigate('/login');
         }
-
         //if not registerd
-        else{
-            
-           
+        else{           
             //set err message
             setErr(res.data.message)
             console.log("err state",err)
-
          }
       }
       catch(err){
         console.log(err)
-        setErr(err.message);
+        setErr("Failed to Register");
       }
+      //clear form
       resetForm();
-
     };
   
-    return (
-        
+    return (  
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
         <div>
         <h2 className="text-center mb-3">Registration Form</h2>
-        <h3 className="text-success">{err}</h3>
+        <h5 className="text-danger text-center">{err}</h5>
         <div className='card text-center shadow p-3 m-3'>
         <Form>
-        
         <div className="row">
           <div className="col-12 col-sm-8 col-md-6 mx-auto">
             <div className="mb-3">
@@ -71,13 +60,11 @@ function Register() {
                 <Field type="text" id="name" name="name" />
                 <ErrorMessage name="name" component="div" />
             </div>
-            
             <div className="mb-3">
                 <label htmlFor="email">Email:</label>
                 <Field type="email" id="email" name="email" />
                 <ErrorMessage name="email" component="div" />
             </div>
-            <div></div>
             <div className="mb-3">
                 <label htmlFor="password">Password:</label>
                 <Field type="password" id="password" name="password" />
@@ -92,9 +79,6 @@ function Register() {
       </Formik>
     );
   };
-  
-    
-
   //export register
   export default Register;
 

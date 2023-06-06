@@ -1,18 +1,16 @@
 import React from "react";
 //import Card from "../card/Card";
-//import Header from "../header/Header";
+import Images from "../images/Images";
+
 function Home() {
   
   return (
     <div className="text-center">
-      {/* nesting Header component */}
-        {/* <div>
-            <Header/>
-        </div> */}
-      {/* nesting Card component */}
+      
       <div className="lead">
-        {/* <Card /> */}
-        <p>Home</p>
+        
+        
+        <Images />
       </div>
     </div>
   );

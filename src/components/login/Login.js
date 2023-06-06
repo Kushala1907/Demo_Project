@@ -43,27 +43,27 @@ function Login() {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <div>
+        <div className=" row justify-content-md-center">
         <h2 className="text-center mb-3">Login Form</h2>
-        <div className='card text-center shadow p-3 m-3'>
+        <div className='card  shadow p-3 m-3 col-sm-8 col-lg-6 '>
         <Form>
         
         <div className="row">
-          <div className="col-12 col-sm-8 col-md-6 mx-auto">
+          <div className="col-12  mx-auto p-3">
             
             
             <div className="mb-3">
                 <label htmlFor="email">Email:</label>
-                <Field type="email" id="email" name="email" />
+                <Field type="email" id="email" name="email" className="form-control" />
                 <ErrorMessage name="email" component="div" />
             </div>
             <div></div>
             <div className="mb-3">
                 <label htmlFor="password">Password:</label>
-                <Field type="password" id="password" name="password" />
+                <Field type="password" id="password" name="password" className="form-control" />
                 <ErrorMessage name="password" component="div" />
             </div>
-          <button className="btn btn-success me-5" type="submit">Login</button>
+          <button className="btn btn-success float-end" type="submit">Login</button>
           </div>
           </div>
         </Form>

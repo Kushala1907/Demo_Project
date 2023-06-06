@@ -1,7 +1,10 @@
 const sequelize=require("../DB/db.config")
 const {DataTypes}=require("sequelize")
 exports.Data=sequelize.define('data',{
-    
+    email:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
     day:{
         type:DataTypes.STRING,
         allowNull:false

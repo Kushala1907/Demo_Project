@@ -23,7 +23,8 @@ function AddImage() {
   
     const handleSubmit = async(userCredObj, { resetForm }) => {
       // Handle form submission
-      console.log("user after submit",userCredObj);  
+      console.log("user after submit",userCredObj);
+      userCredObj.email=userObj.email;  
 
       try{
         //post request to create new employee
@@ -92,10 +93,12 @@ function AddImage() {
                 <ErrorMessage name="image_url" component="div" />
             </div>
             
-          <button className="btn btn-success me-5" type="submit">Upload</button>
+          <button className="btn btn-success float-end" type="submit">Upload</button>
+          <button className="btn btn-warning float-start" onClick={()=>navigate(`/user-images/${userObj.email}`)}>Images</button>
           </div>
           </div>
         </Form>
+
         </div>
         </div>
       </Formik>

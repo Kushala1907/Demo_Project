@@ -93,14 +93,15 @@ const addImage=expressAsyncHandler(async(req,res)=>{
   
   try {
       const { day, image_url } = req.body;
-      
+      let data=req.body;
+      data.email=req.params.email
       // const userExists = await User.findOne({ where: { email } });
       // if (!userExists) {
       //     return res.send({ message: 'User not exist' });
       // }
       
       // upload image
-      await Data.create(req.body)
+      await Data.create(data)
       
       //res.status(201).json({ message: 'Image uploaded successfully' });
       let mailOptions = {
@@ -160,10 +161,16 @@ const deleteImage=expressAsyncHandler(async(req,res)=>{
 
 //get all images
 const getAllImages=expressAsyncHandler(async(req,res)=>{
-    let images=await Data.findAll({attributes:{exclude:['id','day','email']}});
+    let images=await Data.findAll({attributes:{exclude:['id']}});
     res.status(201).send({payload:images})
 });
 
+//get images of a user
+const getUserImages=expressAsyncHandler(async(req,res)=>{
+  let images=await Data.findAll({where:{email:req.params.email}});
+  res.status(201).send({payload:images})
+  //,{where:{GDO:user.email}}
+});
 
 //export request handlers
 module.exports={
@@ -172,5 +179,6 @@ module.exports={
     addImage,
     getAllImages,
     updateImage,
-    deleteImage
+    deleteImage,
+    getUserImages
 }

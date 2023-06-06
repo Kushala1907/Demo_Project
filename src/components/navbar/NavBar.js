@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import {clearState} from '../../slices/loginslice';
-
+import userImage from "../../../src/user.jpg";
 
 import './NavBar.css'
 function NavBar() {
@@ -61,7 +61,7 @@ function NavBar() {
         </li>
        )} 
       </ul>
-      {/* {(status=="success")&&(<p className="ps-5 ms-5"> {userObj.email} <img src={userImg} width="50px" height="50px" className="rounded-circle align-items-lg-end ms-4"/></p>)} */}
+      {(status=="success")&&(<p className="text-white ps-5 ms-5 pt-1" > {userObj.email} <img src={userImage} width="50px" height="50px" className="rounded-circle align-items-lg-end ms-4"/></p>)}
     </div>
   );
 }

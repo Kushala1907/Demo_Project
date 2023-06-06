@@ -9,6 +9,7 @@ import Home from "./components/home/Home";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import AddImage from "./components/user/AddImage";
+import UserImages from './components/userImages/userImages';
 
 function App() {
   //create BrowserRouter Object
@@ -24,6 +25,7 @@ function App() {
         { path: "register", element: <Register /> },
         { path: "login", element: <Login /> },
         { path: "add-image/:email", element: <AddImage /> },
+        { path: "user-images/:email", element: <UserImages /> },
       ],
     },
   ]);

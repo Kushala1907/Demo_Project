@@ -42,13 +42,13 @@ const registerUser=expressAsyncHandler(async(req,res)=>{
           
         }
         else{
-          res.send({ message: 'User already exists with that email' });
+          res.send({ error: 'User already exists with that email' });
 
         }
        
       } catch (error) {
         console.error(error);
-        res.send({ message: 'Failed to register user' });
+        res.send({ error: 'Failed to register user' });
       }
 });
 

@@ -59,23 +59,19 @@ function AddImage() {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <div>
+        <div className="container">
+        <div className=" row justify-content-md-center">
         <h2 className="text-center mb-3">Add Image</h2>
         <h5 className="text-danger text-center">{err}</h5>
+        <div className="col-sm-8 col-lg-6">
         <h5 className="text-success text-center">{message}</h5>
         <div className='card text-center shadow p-3 m-3'>
         <Form>
-        
-        <div className="row">
-          <div className="col-12 col-sm-8 col-md-6 mx-auto">
-            {/* <div className="mb-3">
-                <label htmlFor="email">Email:</label>
-                <Field type="email" id="email" name="email" />
-                <ErrorMessage name="email" component="div" />
-            </div> */}
+        <div className="row justify-content-center">
+          <div className="col-sm-8">
             <div className="mb-3">
-                <label htmlFor="day">Day:</label>
-                <Field as="select" id="day" name="day">
+                <label htmlFor="day" className="form-label">Day:</label>
+                <Field as="select" id="day" name="day" className="form-control">
                     <option value="">Select a day</option>
                     <option value="monday">MONDAY</option>
                     <option value="tuesday">TUESDAY</option>
@@ -88,8 +84,8 @@ function AddImage() {
                 <ErrorMessage name="day" component="div" />
             </div>
             <div className="mb-3">
-                <label htmlFor="image_url">Image_url:</label>
-                <Field type="url" id="image_url" name="image_url" />
+                <label htmlFor="image_url" className="form-label">Image_url:</label>
+                <Field type="url" id="image_url" name="image_url" className="form-control" />
                 <ErrorMessage name="image_url" component="div" />
             </div>
             
@@ -98,7 +94,8 @@ function AddImage() {
           </div>
           </div>
         </Form>
-
+        </div>
+        </div>
         </div>
         </div>
       </Formik>

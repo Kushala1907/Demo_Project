@@ -43,23 +43,22 @@ function Login() {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
+        <div className="container">
         <div className=" row justify-content-md-center">
         <h2 className="text-center mb-3">Login Form</h2>
-        <div className='card  shadow p-3 m-3 col-sm-8 col-lg-6 '>
+        <div className="col-sm-8 col-lg-6">
+        <div className='card shadow p-3 m-3 text-center'>
         <Form>
-        
-        <div className="row">
-          <div className="col-12  mx-auto p-3">
-            
-            
+          <div className="row justify-content-center">
+          <div className="col-sm-8">
             <div className="mb-3">
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email" className="form-label">Email:</label>
                 <Field type="email" id="email" name="email" className="form-control" />
                 <ErrorMessage name="email" component="div" />
             </div>
             <div></div>
             <div className="mb-3">
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password" className="form-label">Password:</label>
                 <Field type="password" id="password" name="password" className="form-control" />
                 <ErrorMessage name="password" component="div" />
             </div>
@@ -67,6 +66,8 @@ function Login() {
           </div>
           </div>
         </Form>
+        </div>
+        </div>
         </div>
         </div>
       </Formik>

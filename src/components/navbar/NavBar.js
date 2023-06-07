@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import {clearState} from '../../slices/loginslice';
-import userImage from "../../../src/user.jpg";
-
 import './NavBar.css'
+
 function NavBar() {
   //declare useDispatch method
   let dispatch=useDispatch();
@@ -61,7 +60,15 @@ function NavBar() {
         </li>
        )} 
       </ul>
-      {(status=="success")&&(<p className="text-white ps-5 ms-5 pt-1" > {userObj.email} <img src={userImage} width="50px" height="50px" className="rounded-circle align-items-lg-end ms-4"/></p>)}
+      {console.log(status)}
+      
+      {(status === "success") && (
+      <div className="d-flex align-items-center">
+        <p className="text-white ps-5 ms-5 pt-2">{userObj.email}</p>
+        <img src="https://tse1.mm.bing.net/th?id=OIP.f3DM2upCo-p_NPRwBAwbKQHaHa&pid=Api&P=0&h=180" style={{ width: "30px", height: "30px" }}  className="rounded-circle align-items-lg-end" />
+      </div>
+    )}
+
     </div>
   );
 }

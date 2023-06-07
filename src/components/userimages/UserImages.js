@@ -84,9 +84,15 @@ function UserImages() {
     return (
       
       <div className="text-center" >
+        <div>
+        <button className="btn position-absolute top-0 start-0 p-1" style={{ width: '30px', height: '30px' }}>
+        <img src="https://tse4.mm.bing.net/th?id=OIP.BaMAGpD8NSNjX7wpMhq1bQHaHa&pid=Api&P=0&h=180" alt="Button Image" 
+        style={{ width: '100%', height: '100%' }}
+        onClick={()=>navigate(`/add-image/${userObj.email}`)} />
+        </button>
+
         <div className="row">
-          {
-            
+          {  
             images.length > 0 ? (
               images.map(userObj=> 
                 <div className="col-sm-12 col-lg-3 col-md-4">
@@ -128,6 +134,7 @@ function UserImages() {
             
       
     </Modal>
+      </div>
       </div>
     );
   }

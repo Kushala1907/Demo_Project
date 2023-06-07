@@ -34,17 +34,6 @@ function Image() {
       <div className="text-center" >
         <div className="row">
           {
-            // images.map(userObj=> 
-            //   <div className="col-sm-12 col-lg-3 col-md-4">
-            //     <div className='card text-center shadow'>
-            //       <div className='card-body'>
-
-            //         <img src={userObj.image_url} height="100%" width="100%"></img>
-            //         <p>{userObj.day}</p>
-            //       </div>
-            //     </div>
-            //   </div>
-            //)
             images.length > 0 ? (
               images.map(userObj=> 
                 <div className="col-sm-12 col-lg-3 col-md-4">

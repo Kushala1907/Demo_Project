@@ -1,9 +1,9 @@
 import { useState } from "react";
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import  axios from "axios";
 import { useNavigate } from 'react-router-dom';
+
 
 function Register() {
     //const history = useHistory();
@@ -31,13 +31,19 @@ function Register() {
         //if not registerd
         else{           
             //set err message
-            setErr(res.data.message)
+
+            if(res.data.error.details)
+            { setErr(res.data.error.details[0].message) }
+            else{
+              setErr(res.data.error);
+            }
+            
             console.log("err state",err)
          }
       }
       catch(err){
-        console.log(err)
-        setErr("Failed to Register");
+        //console.log(err)
+        setErr(err.message);
       }
       //clear form
       resetForm();
@@ -48,34 +54,39 @@ function Register() {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <div>
+        <div className="container">
+        <div className=" row justify-content-md-center">
         <h2 className="text-center mb-3">Registration Form</h2>
+        <div className="col-sm-8 col-lg-6">
         <h5 className="text-danger text-center">{err}</h5>
         <div className='card text-center shadow p-3 m-3'>
         <Form>
-        <div className="row">
-          <div className="col-12 col-sm-8 col-md-6 mx-auto">
+        <div className="row justify-content-center">
+          <div className="col-sm-8">
             <div className="mb-3">
-                <label htmlFor="name">Name:</label>
-                <Field type="text" id="name" name="name" />
+                <label htmlFor="name" className="form-label">Name:</label>
+                <Field type="text" id="name" name="name" className="form-control" />
                 <ErrorMessage name="name" component="div" />
             </div>
             <div className="mb-3">
-                <label htmlFor="email">Email:</label>
-                <Field type="email" id="email" name="email" />
+                <label htmlFor="email" className="form-label">Email:</label>
+                <Field type="email" id="email" name="email" className="form-control" />
                 <ErrorMessage name="email" component="div" />
             </div>
             <div className="mb-3">
-                <label htmlFor="password">Password:</label>
-                <Field type="password" id="password" name="password" />
+                <label htmlFor="password" className="form-label">Password:</label>
+                <Field type="password" id="password" name="password" className="form-control" />
                 <ErrorMessage name="password" component="div" />
             </div>
-          <button className="btn btn-success me-5" type="submit">Submit</button>
+          <button className="btn btn-success float-end" type="submit">Submit</button>
           </div>
           </div>
         </Form>
         </div>
         </div>
+        </div>
+        </div>
+        
       </Formik>
     );
   };

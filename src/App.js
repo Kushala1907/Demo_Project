@@ -9,7 +9,7 @@ import Home from "./components/home/Home";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import AddImage from "./components/user/AddImage";
-import UserImages from './components/userImages/userImages';
+import UserImages from './components/userimages/UserImages';
 
 function App() {
   //create BrowserRouter Object

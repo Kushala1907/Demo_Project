@@ -25,7 +25,7 @@ sequelize.authenticate()
 
 app.use(exp.json());
 
-sequelize.sync({force:true});
+sequelize.sync();
 
 //connecting build of react app with nodejs web server
 const path=require("path")

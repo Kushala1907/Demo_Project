@@ -4,24 +4,21 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import  axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-
 function Register() {
-    //const history = useHistory();
     let navigate=useNavigate()
     //taking state for error
-     let [err,setErr]=useState("")
+    let [err,setErr]=useState("")
     //initialze values
     const initialValues = {
       name: '',
       email: '',
       password: '',
     }; 
-    const handleSubmit = async(user, { resetForm }) => {
-      // Handle form submission
-      console.log("user after submit",user);  
+    const handleSubmit = async(user) => {
+      // Handle form submission  
       try{
         //post request to create new employee
-        let res=await axios.post("http://localhost:2222/user-api/register-user",user);
+        let res=await axios.post(`${process.env.REACT_APP_PATH}/user-api/register-user`,user);
         console.log("response",res) 
         //if registered successfully
         if(res.data.message==="User registered successfully"){
@@ -38,15 +35,14 @@ function Register() {
               setErr(res.data.error);
             }
             
-            console.log("err state",err)
+            console.log("err state",res.data.error)
          }
       }
       catch(err){
         //console.log(err)
         setErr(err.message);
       }
-      //clear form
-      resetForm();
+      
     };
   
     return (  
@@ -59,7 +55,7 @@ function Register() {
         <h2 className="text-center mb-3">Registration Form</h2>
         <div className="col-sm-8 col-lg-6">
         <h5 className="text-danger text-center">{err}</h5>
-        <div className='card text-center shadow p-3 m-3'>
+        <div className='card shadow p-3 m-3'>
         <Form>
         <div className="row justify-content-center">
           <div className="col-sm-8">

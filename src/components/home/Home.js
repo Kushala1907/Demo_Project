@@ -17,8 +17,6 @@ function Home() {
         </button>
       )}
       <div className="lead">
-        
-        
         <Images />
       </div>
     </div>

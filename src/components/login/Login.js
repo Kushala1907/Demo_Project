@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { useEffect,useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import React from 'react';
 import {userLogin} from '../../slices/loginslice';
@@ -6,23 +6,29 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+
+
     //get userState from redux store using useSelector hook
     let {userObj,status,errorMessage}=useSelector(state=>state.login)
+    //taking state for error
+    let [err,setErr]=useState("")
     //decalre useNavigate method
     let navigate=useNavigate()
     //declare dispatch method
     let dispatch=useDispatch()
-
+    
     //useEffect
     useEffect(()=>{
       //if login success
       if(status==="success"){
+        setErr("")
         //if user is super admin  
         navigate(`/add-image/${userObj.email}`)  
       }
       //if login failed 
       else{
-        //if login fails naviagte login agian
+        //if login fails naviagte login again
+        
         navigate('/login')
       }
     },[status])
@@ -31,8 +37,7 @@ function Login() {
       password: '',
     };  
     const handleSubmit = async(user, { resetForm }) => {
-      // Handle form submission
-      console.log("user after submit",user);  
+      // Handle form submission  
       dispatch(userLogin(user))
       
     };
@@ -46,8 +51,9 @@ function Login() {
         <div className="container">
         <div className=" row justify-content-md-center">
         <h2 className="text-center mb-3">Login Form</h2>
+        <h5 className="text-danger text-center">{errorMessage}</h5>
         <div className="col-sm-8 col-lg-6">
-        <div className='card shadow p-3 m-3 text-center'>
+        <div className='card shadow p-3 m-3 '>
         <Form>
           <div className="row justify-content-center">
           <div className="col-sm-8">

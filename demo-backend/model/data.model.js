@@ -21,4 +21,4 @@ exports.Data=sequelize.define('data',{
         updatedAt:false,
         freezeTableName:true
     });
-// (async()=> await this.User.sync())();
+ (async()=> await this.Data.sync())();

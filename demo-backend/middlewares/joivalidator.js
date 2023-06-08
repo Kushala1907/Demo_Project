@@ -3,17 +3,17 @@ const Joi=require('joi')
 
 const joiValidator=(req,res,next)=>{
     const schema = Joi.object().keys({
-        name:Joi.string().optional().label('John'),
-        password:Joi.string().min(8).optional().messages({
-            'string.min': 'Password must be at least 8 characters long',
-          }).label('Password'),
-        day: Joi.string().valid('monday','tuesday','wednesday','thursday','friday','saturday','sunday'),
+        name:Joi.string().optional('Name is required').label('Name'),
+        
         email:Joi.string().email({
             minDomainSegments:2,
             tlds:{allow:["com","in"]}
-        }).messages({
+        }).required('email is required').messages({
             'string.email': 'Enter a valid Email Id'
-          }).label('john@gmail.com')
+          }).label('Email'),
+          password:Joi.string().min(8).required('Email is required').messages({
+            'string.min': 'Password must be at least 8 characters long',
+          }).label('Password'),
     }).unknown(true)
     const {error}=schema.validate(req.body,{ abortEarly:false});
     if(error){
@@ -22,7 +22,6 @@ const joiValidator=(req,res,next)=>{
     else{
         next();
     }
-    
 }
 
 //export

@@ -25,7 +25,7 @@ function UserImages() {
 
     //update image
     const updateImageDetails=(obj)=>{
-        console.log(obj)
+        
         setImageId(obj.id)
         openModal()
     }
@@ -34,10 +34,10 @@ function UserImages() {
     const onSubmit =async( values)=>{
       console.log("onSubmit",values)
       values.id = imageId
-      let res = await axios.put(`http://localhost:2222/user-api/update-image/${userObj.email}`,values,{
+      let res = await axios.put(`${process.env.REACT_APP_PATH}/user-api/update-image/${userObj.email}`,values,{
             headers:{Authorization: `Bearer ${token}`}
       })
-      console.log("response",res)
+      
       closeModal()
       getUserImages()
     }
@@ -45,10 +45,10 @@ function UserImages() {
     const getUserImages=async()=>{
       try{
         //req to get user images
-        let res=await axios.get(`http://localhost:2222/user-api/get-user-images/${userObj.email}`,{
+        let res=await axios.get(`${process.env.REACT_APP_PATH}/user-api/get-user-images/${userObj.email}`,{
             headers:{Authorization: `Bearer ${token}`}
         })
-        console.log(res.data)
+        
         //set res.data.payload to upadtes
         setImages(res.data.payload)  
       }
@@ -61,7 +61,7 @@ function UserImages() {
     //delete user-image
     const deleteImage=async(image_id)=>{
     //req to delete project-update
-        let res= await axios.delete(`http://localhost:2222/user-api/delete-image/${userObj.email}/${image_id}`,{
+        let res= await axios.delete(`${process.env.REACT_APP_PATH}/user-api/delete-image/${userObj.email}/${image_id}`,{
             headers:{Authorization: `Bearer ${token}`}
         })
         //if deleted successfully
@@ -85,7 +85,7 @@ function UserImages() {
       
       <div className="text-center" >
         <div>
-        <button className="btn position-absolute top-0 start-0 p-1" style={{ width: '30px', height: '30px' }}>
+        <button className="btn position-absolute start-0 top-0 p-1" style={{ width: '30px', height: '30px' }}>
         <img src="https://tse4.mm.bing.net/th?id=OIP.BaMAGpD8NSNjX7wpMhq1bQHaHa&pid=Api&P=0&h=180" alt="Button Image" 
         style={{ width: '100%', height: '100%' }}
         onClick={()=>navigate(`/add-image/${userObj.email}`)} />
@@ -96,7 +96,7 @@ function UserImages() {
             images.length > 0 ? (
               images.map(userObj=> 
                 <div className="col-sm-12 col-lg-3 col-md-4">
-                  <div className='card text-center shadow'>
+                  <div className='card text-center shadow pb-3 pt-3 mt-4'>
                     <div className='card-body'>
   
                       <img src={userObj.image_url} height="100%" width="100%"></img>

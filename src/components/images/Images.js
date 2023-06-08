@@ -1,7 +1,5 @@
 import React ,{ useState ,useEffect}from "react";
-import { useSelector } from "react-redux";
 import axios from "axios";
-import { useNavigate} from "react-router-dom";
 
 function Image() {
     //create state to updates with empty array
@@ -11,7 +9,7 @@ function Image() {
     const getAllImages=async()=>{
       try{
         //req to get all images
-        let res=await axios.get(`http://localhost:2222/user-api/get-images`)
+        let res=await axios.get(`${process.env.REACT_APP_PATH}/user-api/get-images`)
         console.log(res.data)
         //set res.data.payload to upadtes
         setImages(res.data.payload)  
@@ -36,7 +34,7 @@ function Image() {
           {
             images.length > 0 ? (
               images.map(userObj=> 
-                <div className="col-sm-12 col-lg-3 col-md-4">
+                <div className="col-sm-12 col-lg-3 col-md-4 mt-4">
                   <div className='card text-center shadow'>
                     <div className='card-body'>
   

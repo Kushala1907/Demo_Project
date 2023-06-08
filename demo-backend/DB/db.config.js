@@ -4,8 +4,6 @@ require("dotenv").config()
 //import sequelize
 const { Sequelize } = require('sequelize');
 
-
-
 //create instace
 const sequelize=new Sequelize(process.env.DB_NAME,process.env.DB_USER,process.env.DB_PASSWORD,
     {
@@ -13,6 +11,6 @@ const sequelize=new Sequelize(process.env.DB_NAME,process.env.DB_USER,process.en
         dialect:'mysql'
     }
 );
-sequelize.sync({force:true});
+sequelize.sync();
 //exports 
 module.exports=sequelize

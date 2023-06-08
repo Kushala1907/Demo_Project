@@ -4,23 +4,23 @@ import axios from "axios";
 export const userLogin=createAsyncThunk('login/userLogin',async(userCredObj,{rejectWithValue})=>{
 
     try{
-        //console.log(userCredObj)
-        let res=await axios.post('http://localhost:2222/user-api/login-user',userCredObj)
-
-        //console.log(res.data.payload)
+        let res=await axios.post(`${process.env.REACT_APP_PATH}/user-api/login-user`,userCredObj)
         if(res.data.message=='Login successful'){
             //store token in local/session storage
             sessionStorage.setItem("token",res.data.token)
             return res.data;
         }
+        else if(res.data.message=='Invalid password'){
+            throw new Error(res.data.message)
+        }
         else{
-            console.log(res);
-           throw new Error(res.data.message)
+            
+            throw new Error(res.data.error.details[0].message)
+            
         }
         
     }
     catch(err){
-      //  console.log("err is",err);
         return rejectWithValue(err);
     }
 });
@@ -46,7 +46,6 @@ export const loginSlice=createSlice({
             state.status="pending";
         });
         builder.addCase(userLogin.fulfilled,(state,action)=>{
-            // console.log(action)
             state.userObj=action.payload.user;
             state.userLoginStatus=true;
             state.errorMessage="";

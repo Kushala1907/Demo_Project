@@ -6,17 +6,12 @@ const app=exp();
 //import sequelize
 const sequelize=require("./DB/db.config")
 
-
-//import async express handler
-const expressAsyncHandler=require("express-async-handler");
-
 //import dotenv
 require("dotenv").config()
 
-const PORT=process.env.PORT||2222;
+const PORT=process.env.PORT;
 
 app.listen(PORT,()=>console.log(`htttp server running on ${PORT}...`))
-
 
 //test db connection
 sequelize.authenticate()

@@ -11,46 +11,44 @@ function AddImage() {
     let navigate=useNavigate()
     //taking state for error
     let [err,setErr]=useState("")
-    let [message,setMessage]=useState("")
     //get token from session storage
     let token=sessionStorage.getItem("token");
     //initialze values
-    const initialValues = {
-      
+    const initialValues = {      
       day:'',
       image_url: '',
     };
   
-    const handleSubmit = async(userCredObj, { resetForm }) => {
+    const handleSubmit = async(userCredObj) => {
       // Handle form submission
       console.log("user after submit",userCredObj);
       userCredObj.email=userObj.email;  
 
       try{
         //post request to create new employee
-        let res=await axios.post(`http://localhost:2222/user-api/add-image/${userObj.email}`,userCredObj,{
+        let res=await axios.post(`${process.env.REACT_APP_PATH}/user-api/add-image/${userObj.email}`,userCredObj,{
           headers:{Authorization: `Bearer ${token}`}
         });
         console.log("response",res) 
         //if registered successfully
         if(res.data.message==="Image uploaded and email sent"){
-            setMessage(res.data.message);
-            //navigate('/login');
+            setErr(res.data.message);
         }
         //if not registerd
         else{           
             //set err message
-            setErr(res.data.message)
-            setMessage("");
-            console.log("err state",err)
+            if(res.data.error.details)
+            { setErr(res.data.error.details[0].message) }
+            else{
+              setErr(res.data.error);
+            }
+            
          }
       }
       catch(err){
-        console.log(err)
         setErr("Failed to Upload");
       }
-      //clear form
-      resetForm();
+      
     };
   
     return (
@@ -62,10 +60,9 @@ function AddImage() {
         <div className="container">
         <div className=" row justify-content-md-center">
         <h2 className="text-center mb-3">Add Image</h2>
-        <h5 className="text-danger text-center">{err}</h5>
+        <h5 className="text-primary text-center">{err}</h5>
         <div className="col-sm-8 col-lg-6">
-        <h5 className="text-success text-center">{message}</h5>
-        <div className='card text-center shadow p-3 m-3'>
+        <div className='card shadow p-3 m-3'>
         <Form>
         <div className="row justify-content-center">
           <div className="col-sm-8">
@@ -87,8 +84,7 @@ function AddImage() {
                 <label htmlFor="image_url" className="form-label">Image_url:</label>
                 <Field type="url" id="image_url" name="image_url" className="form-control" />
                 <ErrorMessage name="image_url" component="div" />
-            </div>
-            
+            </div>            
           <button className="btn btn-success float-end" type="submit">Upload</button>
           <button className="btn btn-warning float-start" onClick={()=>navigate(`/user-images/${userObj.email}`)}>Images</button>
           </div>
@@ -101,10 +97,7 @@ function AddImage() {
       </Formik>
     );
   };
-  
-    
-
-  //export register
-  export default AddImage;
+//export register
+export default AddImage;
 
   

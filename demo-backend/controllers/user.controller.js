@@ -26,8 +26,6 @@ const { Data }= require("../model/data.model");
 
 //register-user
 const registerUser=expressAsyncHandler(async(req,res)=>{
-    // await User.create(req.body)
-    // res.status(201).send({message:"Registration successfull..."})
     try {
         let { name, email, password } = req.body;
         
@@ -58,19 +56,19 @@ const loginUser=expressAsyncHandler(async (req,res)=>{
         const { email, password } = req.body;
         // Check if all required properties are present in the request body
         if (!email || !password) {
-          return res.status(400).send({ message: 'Please provide email and password' });
+          return res.send({ message: 'Please provide email and password' });
         }
         // Find the user by email
         const user = await User.findOne({ where: { email } });
         // If user doesn't exist
         if (!user) {
-          return res.status(401).send({ message: 'Invalid email or password' });
+          return res.send({ message: 'Invalid email' });
         }
         // Compare the password
         const passwordMatch = await bcryptjs.compare(password, user.password);
         // If password doesn't match
         if (!passwordMatch) {
-          return res.status(401).send({ message: 'Invalid email or password' });
+          return res.send({ message: 'Invalid password' });
         }
         // Generate a JWT token
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -90,20 +88,12 @@ const loginUser=expressAsyncHandler(async (req,res)=>{
 
 //add images by authenticated user
 const addImage=expressAsyncHandler(async(req,res)=>{
-  
   try {
       const { day, image_url } = req.body;
       let data=req.body;
       data.email=req.params.email
-      // const userExists = await User.findOne({ where: { email } });
-      // if (!userExists) {
-      //     return res.send({ message: 'User not exist' });
-      // }
-      
       // upload image
       await Data.create(data)
-      
-      //res.status(201).json({ message: 'Image uploaded successfully' });
       let mailOptions = {
         from: 'kushalaindia@gmail.com',
         to: req.params.email,
@@ -169,7 +159,6 @@ const getAllImages=expressAsyncHandler(async(req,res)=>{
 const getUserImages=expressAsyncHandler(async(req,res)=>{
   let images=await Data.findAll({where:{email:req.params.email}});
   res.status(201).send({payload:images})
-  //,{where:{GDO:user.email}}
 });
 
 //export request handlers

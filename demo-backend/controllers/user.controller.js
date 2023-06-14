@@ -90,8 +90,11 @@ const loginUser=expressAsyncHandler(async (req,res)=>{
 const addImage=expressAsyncHandler(async(req,res)=>{
   try {
       const { day, image_url } = req.body;
+      
       let data=req.body;
-      data.email=req.params.email
+      
+      data.email=req.params.email;
+      // data.image_url=req.file.path;
       // upload image
       await Data.create(data)
       let mailOptions = {

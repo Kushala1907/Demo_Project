@@ -38,6 +38,7 @@ function Login() {
     };  
     const handleSubmit = async(user, { resetForm }) => {
       // Handle form submission  
+      console.log(user)
       dispatch(userLogin(user))
       
     };

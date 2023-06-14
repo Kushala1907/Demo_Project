@@ -14,17 +14,17 @@ Content-Type: application/json
 
 {
     "email":"naredlakushala@gmail.com",
-    "password":"123456789"
+    "password":"12345678"
 }
 
 ###ADD IMAGE
 POST http://localhost:2222/user-api/add-image/naredlakushala@gmail.com
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hcmVkbGFrdXNoYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY4NTk1ODMzNywiZXhwIjoxNjg1OTYxOTM3fQ.0ibWegxeaDFE4gKL9pp9sqwMuNKklDx19bq-kT73K5Y
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hcmVkbGFrdXNoYWxhQGdtYWlsLmNvbSIsImlhdCI6MTY4NjY1NDY5NywiZXhwIjoxNjg2NjU4Mjk3fQ.IWbwhKzKpJpYXQtS0C2CXcxLebFTQw2-DOSioCZcm3M
+Content-Type: multipart/form-data
 
 {
     "day":"monday",
-    "image_url":"kushala"
+    "image_url":"http://thewowstyle.com/wp-content/uploads/2015/01/nature-wallpaper-27.jpg"
 }
 
 ###GET ALL IMAGES

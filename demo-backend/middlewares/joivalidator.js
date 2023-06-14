@@ -11,7 +11,7 @@ const joiValidator=(req,res,next)=>{
         }).required('email is required').messages({
             'string.email': 'Enter a valid Email Id'
           }).label('Email'),
-          password:Joi.string().min(8).required('Email is required').messages({
+        password:Joi.string().min(8).required('Password is required').messages({
             'string.min': 'Password must be at least 8 characters long',
           }).label('Password'),
     }).unknown(true)
